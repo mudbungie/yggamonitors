@@ -1,6 +1,7 @@
 import logging
 import json
 import arrow
+import sys
 
 MODULE_NAME = "yggamonitors"
 
@@ -21,8 +22,11 @@ class LocalFormatter(logging.Formatter):
 
 
 def configure_logger(
-    level: int = logging.INFO,
+    level: int = logging.DEBUG,
 ) -> None:
     module_logger = logging.getLogger(MODULE_NAME)
-    formatter = LocalFormatter()
-    logging.getLogger().handlers[0].setFormatter(fmt=formatter)
+    module_logger.setLevel(level)
+
+    handler = logging.StreamHandler(stream=sys.stdout)
+    handler.setFormatter(fmt=LocalFormatter())
+    module_logger.addHandler(handler)
