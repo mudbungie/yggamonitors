@@ -1,5 +1,6 @@
 import enum
 
+
 class MonitorStatuses(enum.Enum):
     HEALTHY = "healthy"
     IMPAIRED = "impaired"

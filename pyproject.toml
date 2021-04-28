@@ -8,6 +8,7 @@ authors = ["mudbungie <mudbungie@gmail.com>"]
 python = "^3.8"
 requests = "^2.25.1"
 pytest = "^6.2.3"
+arrow = "^1.1.0"
 
 [tool.poetry.dev-dependencies]
 
