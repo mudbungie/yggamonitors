@@ -3,6 +3,8 @@ import json
 import arrow
 import sys
 
+from logging import getLogger
+
 MODULE_NAME = "yggamonitors"
 
 
