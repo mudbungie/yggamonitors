@@ -35,6 +35,3 @@ def get_logger(source, level=logging.DEBUG) -> logging.Logger:
     logger.addHandler(handler)
 
     return logger
-
-
-    

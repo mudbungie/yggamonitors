@@ -8,6 +8,7 @@ import logging
 
 logger = get_logger(__name__)
 
+
 @click.command()
 @click.argument("site_name", type=str, required=True)
 def check(site_name: str) -> None:
@@ -23,20 +24,20 @@ def check_all_sites():
         status = site_monitor.check()
         logger.error(f"{address} status: {status}")
 
+
 @click.group()
 @click.option("--debug", is_flag=True, default=False)
 def cli(debug: bool):
     if debug:
         logger.setLevel(logging.DEBUG)
 
+
 def add_functions_to_cli():
-    commands: List[click.Group] = [
-        check_all_sites,
-        check
-    ]
+    commands: List[click.Group] = [check_all_sites, check]
 
     for command in commands:
         cli.add_command(command)
+
 
 if __name__ == "__main__":
     add_functions_to_cli()
