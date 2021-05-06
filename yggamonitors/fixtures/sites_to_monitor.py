@@ -1,7 +1,7 @@
 known_sites = {
-    "MODEM": "192.168.0.1",
-    "ROUTER": "192.168.1.1",
-    "WAP1": "192.168.1.10",
-    "WAP2": "192.168.1.11",
-    "ARBITRARY_SITE": "iscaliforniaonfire.com",
+    "MODEM": "https://192.168.0.1",
+    "ROUTER": "https://192.168.1.1",
+    "WAP1": "https://192.168.1.10",
+    "WAP2": "https://192.168.1.11",
+    "ARBITRARY_SITE": "https://iscaliforniaonfire.com",
 }

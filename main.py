@@ -6,7 +6,7 @@ from yggamonitors.lib.monitors.HttpMonitor import BasicHttpsMonitor
 from yggamonitors.logger import get_logger
 import logging
 
-logger = get_logger(__name__)
+log = get_logger(__name__)
 
 
 @click.command()
@@ -20,16 +20,18 @@ def check(site_name: str) -> None:
 @click.command()
 def check_all_sites():
     for site_name, address in known_sites.items():
-        site_monitor = BasicHttpsMonitor(address=address)
-        status = site_monitor.check()
-        logger.error(f"{address} status: {status}")
+        site = get_site_from_loose_name(address)
+        status = site.check()
+        print(f"Status of {site.url}: {status}")
 
 
 @click.group()
 @click.option("--debug", is_flag=True, default=False)
 def cli(debug: bool):
     if debug:
-        logger.setLevel(logging.DEBUG)
+        log.setLevel(logging.DEBUG)
+    else:
+        log.setLevel(logging.INFO)
 
 
 def add_functions_to_cli():
