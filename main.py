@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from typing import List
 import click
 from yggamonitors.lib.utils import get_site_from_loose_name
@@ -22,7 +24,7 @@ def check_all_sites():
     for site_name, address in known_sites.items():
         site = get_site_from_loose_name(address)
         status = site.check()
-        print(f"Status of {site.url}: {status}")
+        print(f"Status of {site.url}: {status.value}")
 
 
 @click.group()
