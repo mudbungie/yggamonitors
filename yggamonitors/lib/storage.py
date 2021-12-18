@@ -3,8 +3,14 @@ from typing import Optional
 from yggamonitors.fixtures.statuses import MonitorStatuses
 from yggamonitors.lib.target import Target
 from time import time
+from os import makedirs
+
+def ensure_dir_path(path: str) -> None:
+    makedirs(path)
 
 def get_connection(location: Optional[str] = "/opt/yggamonitors/yggamonitors.sqlite") -> sqlite3.Connection:
+    directory = "/".join(location.split("/")[:-1])
+    ensure_dir_path(directory)
     return sqlite3.connect(location)
 
 def initialize_tables() -> None:
