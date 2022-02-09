@@ -9,3 +9,8 @@ app = FastAPI()
 async def root():
     statuses: dict = check_all_sites()
     return statuses
+
+
+@app.get("/graph/{site}")
+def graph():
+    pass

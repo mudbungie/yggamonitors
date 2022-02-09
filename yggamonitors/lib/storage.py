@@ -1,5 +1,5 @@
 import sqlite3
-from typing import Optional
+from typing import Optional, Dict
 from yggamonitors.fixtures.statuses import MonitorStatus
 from yggamonitors.lib.monitors.Monitor_Base import Monitor
 from yggamonitors.lib.target import Target
@@ -29,3 +29,17 @@ def write_check_status(target: Target, status: MonitorStatus, timestamp=None) ->
         timestamp = time()
     connection.execute(f"INSERT into statuses VALUES ('{target.name}', '{str(status)}', {timestamp})")
     connection.commit()
+
+
+def get_uptime_data(target, duration) -> Dict[int, str]:
+    now = time()
+    start_time = now - duration
+    connection = get_connection()
+    records = connection.execute(f"SELECT status, timestamp from statuses WHERE name = '{target}' and timestamp > {start_time} ORDER BY timestamp")
+
+    uptime_records = []
+    for record in records:
+        up = record[0] == "healthy"
+        timestamp = record[1]
+        uptime_records.append((up, timestamp))
+    return uptime_records
