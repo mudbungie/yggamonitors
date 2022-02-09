@@ -1,7 +1,7 @@
 import enum
 
 
-class MonitorStatuses(enum.Enum):
+class MonitorStatus(enum.Enum):
     HEALTHY = "healthy"
     IMPAIRED = "impaired"
     DOWN = "down"

@@ -2,7 +2,7 @@
 
 from typing import List, Optional
 from yggamonitors.lib.storage import initialize_tables
-from yggamonitors.continuous_monitor import start_continuous_monitors
+from yggamonitors.continuous_monitor import start_continuous_monitors, parallel_continuous_checks
 import click
 from yggamonitors.lib.utils import get_all_targets, get_site_from_loose_name
 from yggamonitors.fixtures.sites_to_monitor import known_sites
@@ -33,11 +33,17 @@ def check_all_sites():
 @click.option(
     "--frequency", type=int, default=60, help="Frequency of checks in seconds"
 )
-def start_polling_all_sites(frequency):
+@click.option("--parallel", is_flag=True)
+def start_polling_all_sites(frequency, parallel):
     targets = get_all_targets()
-    print("Continuous monitors initiated")
-    start_continuous_monitors(targets=targets, frequency=frequency)
-    print("Continuous monitors concluded")
+    if not parallel:
+        print("Continuous monitors initiated")
+        start_continuous_monitors(targets=targets, frequency=frequency)
+        print("Continuous monitors concluded")
+    else:
+        print("Continuous parallel monitors initiated")
+        parallel_continuous_checks(targets=targets, frequency=frequency)
+        print("Continuous parallel monitors concluded")
 
 
 @click.command()
