@@ -1,0 +1,16 @@
+sites:
+  localhost:
+    address: 127.0.0.1
+    port: 22
+  the_internet: 
+    address: 1.1.1.1
+    port: 443
+  modem:
+    address: 192.168.0.1
+    port: 80
+  router:
+    address: 192.168.1.1
+    port: 80
+  access_point:
+    address: 192.168.1.10
+    port: 80
