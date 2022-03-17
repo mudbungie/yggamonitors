@@ -13,7 +13,7 @@ def main(config_file):
     
     for name, site_config in config["sites"].items():
         site = Site(name=name, address=site_config["address"], port=site_config["port"])
-        site.is_tcp_accessible()
+        site.check()
 
 
 if __name__ == "__main__":
